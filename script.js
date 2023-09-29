@@ -6,6 +6,7 @@ const content = document.querySelector(".content");
 const contentFinish = document.querySelector(".finish");
 const btnRestart = document.querySelector(".finish button");
 const btnStart = document.querySelector(".start-button"); // Novo botão "Iniciar"
+const welcomeMessage = document.querySelector(".welcome-message"); // Mensagem de boas-vindas
 const countdownElement = document.getElementById("countdown"); // Elemento para exibir o contador de tempo
 const timeUpMessage = document.querySelector(".time-up"); // Elemento para exibir a mensagem de tempo esgotado
 const restartTimerButton = document.getElementById("restartTimer"); // Botão "Reiniciar" após o tempo esgotado
@@ -14,7 +15,7 @@ import questions from "./questions.js";
 
 let currentIndex = 0;
 let questionsCorrect = 0;
-let timeRemaining = 20; // Tempo em segundos
+let timeRemaining = 60; // Tempo em segundos
 
 let timerInterval;
 
@@ -40,6 +41,11 @@ function hideTimeUpMessage() {
 }
 
 btnStart.onclick = () => {
+    // Ocultar a mensagem de boas-vindas ao clicar no botão "Iniciar"
+    if (welcomeMessage) {
+        welcomeMessage.style.display = "none";
+    }
+
     btnStart.style.display = "none"; // Oculta o botão "Iniciar" ao clicar
     content.style.display = "flex";
     currentIndex = 0;

@@ -87,7 +87,14 @@ button {
 .start-button {
     position: absolute;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 120px;
+    width: 200px;
+
+}
+.welcome-message {
+    position: absolute;
+    text-align: center;
+    margin-top: -20px;
     width: 200px;
 
 }
