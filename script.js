@@ -10,17 +10,16 @@ const welcomeMessage = document.querySelector(".welcome-message"); // Mensagem d
 const countdownElement = document.getElementById("countdown"); // Elemento para exibir o contador de tempo
 const timeUpMessage = document.querySelector(".time-up"); // Elemento para exibir a mensagem de tempo esgotado
 const restartTimerButton = document.getElementById("restartTimer"); // Botão "Reiniciar" após o tempo esgotado
-
 import questions from "./questions.js";
 
 let currentIndex = 0;
 let questionsCorrect = 0;
-let timeRemaining = 60; // Tempo em segundos
-
+let timeRemaining = 320; // Tempo em segundos
 let timerInterval;
+let isAnsweredCorrectly = true;
 
 function startTimer() {
-    timerInterval = setInterval(function() {
+    timerInterval = setInterval(function () {
         timeRemaining--;
         countdownElement.innerText = timeRemaining;
         if (timeRemaining <= 0) {
@@ -64,28 +63,111 @@ btnRestart.onclick = () => {
 restartTimerButton.onclick = () => {
     hideTimeUpMessage();
     btnStart.style.display = "block"; // Exibir o botão "Iniciar" novamente
-    timeRemaining = 60; // Reiniciar o tempo
+    timeRemaining = 320; // Reiniciar o tempo
     countdownElement.innerText = timeRemaining;
     clearInterval(timerInterval); // Parar o timer atual
     startTimer(); // Iniciar o timer novamente
 
-    // Recarregar a página
     window.location.reload();
 };
 
-function nextQuestion(e) {
-    if (e.target.getAttribute("data-correct") === "true") {
-        questionsCorrect++;
+function showAnswerExplanation() {
+    content.style.display = "none";
+    contentFinish.style.display = "none";
+    timeUpMessage.style.display = "none";
+
+    if (!isAnsweredCorrectly) { // Verificar se a resposta está errada
+        // Exibir explicação da resposta incorreta
+        const explanationDiv = document.querySelector(".answer-explanation");
+        explanationDiv.style.display = "block";
+
+        // Acessar a explicação da pergunta atual
+        const currentQuestion = questions[currentIndex];
+        const explanationText = currentQuestion.explanation;
+
+        // Exibir a explicação no elemento HTML
+        const explanationElement = document.querySelector(".explanation-text");
+        explanationElement.textContent = explanationText;
     }
 
-    if (currentIndex < questions.length - 1) {
-        currentIndex++;
+    // Pausar o timer
+    clearInterval(timerInterval);
+
+    // Exibir o botão "Continue"
+    const continueButton = document.querySelector(".continue-button");
+    continueButton.style.display = "block";
+
+    // Não finalizar o quiz após uma resposta errada
+}
+
+function nextQuestion(e) {
+    const selectedButton = e.target;
+    const isCorrect = selectedButton.getAttribute("data-correct") === "true";
+
+    // Desabilitar todos os botões de resposta após a seleção
+    document.querySelectorAll(".answer").forEach((button) => {
+        button.removeEventListener("click", nextQuestion); // Remover o evento de clique
+    });
+
+    if (isCorrect) {
+        selectedButton.style.backgroundColor = "green"; // Resposta correta fica verde
+        questionsCorrect++;
+    } else {
+        selectedButton.style.backgroundColor = "red"; // Resposta incorreta fica vermelha
+        isAnsweredCorrectly = false; // Define a flag como falsa quando a resposta está errada
+    }
+
+    setTimeout(() => {
+        if (isAnsweredCorrectly) {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                loadQuestion(); // Carregar a próxima pergunta após 1 segundo se a resposta estiver correta
+            } else {
+                finish();
+                clearInterval(timerInterval);
+            }
+        } else {
+            showAnswerExplanation(); // Mostrar explicação da resposta apenas se estiver errada
+        }
+    }, 1000); // Aguardar 1 segundo antes de passar para a próxima pergunta ou mostrar a explicação
+}
+
+
+// Função para continuar com o quiz após resposta incorreta
+function continueQuiz() {
+    // Ocultar a explicação da resposta incorreta
+    const explanationDiv = document.querySelector(".answer-explanation");
+    explanationDiv.style.display = "none";
+
+    // Ocultar o botão "Continue" novamente
+    const continueButton = document.querySelector(".continue-button");
+    continueButton.style.display = "none";
+
+    // Reiniciar o timer
+    timeRemaining = 320;
+    countdownElement.innerText = timeRemaining;
+    startTimer();
+
+    // Avançar para a próxima pergunta
+    currentIndex++;
+
+    // Verificar se ainda há perguntas a serem exibidas
+    if (currentIndex < questions.length) {
+        content.style.display = "flex";
         loadQuestion();
     } else {
         finish();
-        clearInterval(timerInterval); // Pausa o contador quando todas as perguntas foram respondidas
+        clearInterval(timerInterval);
     }
 }
+
+
+
+// Adicionar um evento de clique para o botão "Continuar"
+const continueButton = document.querySelector(".continue-button");
+continueButton.addEventListener("click", continueQuiz);
+
+
 
 function finish() {
     textFinish.innerHTML = `Você acertou ${questionsCorrect} de ${questions.length}`;
@@ -116,6 +198,5 @@ function loadQuestion() {
     });
 }
 
-// Inicialmente, mostrar apenas o botão "Iniciar" e ocultar o conteúdo do quiz
 content.style.display = "none";
 contentFinish.style.display = "none";

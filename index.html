@@ -5,37 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroQuiz 60s</title>
+    <title>NeuroQuiz</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h2>NeuroQuiz 60s</h2>
+    <h2>NeuroQuiz</h2>
     <p class="welcome-message">Bem-vindo ao nosso quiz! Clique em "Iniciar" para começar.</p>
     <button class="start-button">Iniciar</button>
     <main>
         <div class="content">
-            <div class="timer">
-                Tempo restante: <span id="countdown">60</span> segundos
-            </div>
             <span class="spnQtd"></span>
+            <div class="timer">
+                Tempo restante: <span id="countdown">320</span> segundos
+            </div>
+            
             <span class="question"></span>
             <div class="answers"></div>
         </div>
         <div class="finish">
             <span></span>
-            <button>Reiniciar</button>
+            <button id="restartButton">Reiniciar</button> <!-- Adicionei o ID "restartButton" -->
         </div>
 
-        <!-- Código adicionado para mensagem de tempo esgotado e botão de reinício -->
+        </div>
         <div class="time-up hidden">
-            Tempo Esgotado! 
+            Tempo Esgotado!
             <button id="restartTimer">Reiniciar</button>
         </div>
-        <!-- Fim do código adicionado -->
 
+        <div class="answer-explanation">
+            <p class="explanation-text"></p>
+             <!-- Botão "Continue" adicionado aqui -->
+        </div>
+        
     </main>
+    <button class="continue-button">Proxima Pergunta</button>
 
     <script src="script.js" type="module"></script>
 </body>

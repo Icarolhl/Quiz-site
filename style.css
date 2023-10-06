@@ -1,115 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'poppins', sans-serif;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
 
-body {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 5px;
-    background: linear-gradient(90deg, rgba(91, 30, 159, 1) 0%, rgba(77, 39, 182, 1) 100%);
-}
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        background: linear-gradient(90deg, rgba(91, 30, 159, 1) 0%, rgba(77, 39, 182, 1) 100%);
+    }
 
-body h2 {
-    color: white;
-}
+    body h2 {
+        color: white;
+    }
 
-main {
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 300px;
-    min-height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    main {
+        background-color: white;
+        padding: 10px;
+        border-radius: 10px;
+        width: 500px;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-}
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
 
-.spnQtd {
-    text-align: end;
-}
+    .spnQtd {
+        position: absolute;
+        text-align: end;
+        margin-left: 450px;
+    }
 
-.answers {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+    .answers {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
 
-button {
-    width: 100%;
-    text-align: start;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #008CCC;
-    color: white;
-}
+    button {
+        width: 100%;
+        text-align: start;
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #008CCC;
+        color: white;
+    }
 
-.finish {
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-}
+    .finish {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-.finish button {
-    text-align: center;
-}
+    .finish button {
+        text-align: center;
+    }
 
-#startButton{
-    width: 100%;
-    text-align: center;
-    padding-top: 30px;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: red;
-    color: black;
+    #startButton{
+        width: 100%;
+        text-align: center;
+        padding-top: 30px;
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: red;
+        color: black;
 
-}
+    }
 
-.start-button {
-    position: absolute;
-    text-align: center;
-    margin-top: 120px;
-    width: 200px;
+    .start-button {
+        position: absolute;
+        text-align: center;
+        margin-top: 130px;
+        width: 200px;
 
-}
-.welcome-message {
-    position: absolute;
-    text-align: center;
-    margin-top: -20px;
-    width: 200px;
+    }
+    .welcome-message {
+        font-size: 110%;
+        position: absolute;
+        text-align: center;
+        margin-top: -20px;
+        width: 400px;
 
-}
+    }
 
-.start-button.hidden {
-    display: none;
-}
+    .start-button.hidden {
+        display: none;
+    }
 
-.timer {
-    display: none;
-}
+    .timer {
+        margin-bottom: 20px;
+        display: none;
+    }
 
-.time-up {
-    display: none; /* Inicialmente, ocultar a mensagem de tempo esgotado */
-    text-align: center;
-    font-size: 18px;
-    color: red;
-}
+    .time-up {
+        display: none; 
+        text-align: center;
+        font-size: 18px;
+        color: red;
+    }
+
+    .continue-button {
+        display: none;
+        text-align: center;
+        width: 200px;
+        border-radius: 20px;
+    }
