@@ -11,6 +11,7 @@
     const timeUpMessage = document.querySelector(".time-up"); // Elemento para exibir a mensagem de tempo esgotado
     const restartTimerButton = document.getElementById("restartTimer"); // Botão "Reiniciar" após o tempo esgotado
     import questions from "./questions.js";
+    var a = 0
 
     let currentIndex = 0;
     let questionsCorrect = 0;
@@ -196,7 +197,7 @@
         </button>
         `;
     
-            answers.appendChild(div);
+            answers.appendChild(div);a
         });
     
         document.querySelectorAll(".answer").forEach((item) => {
