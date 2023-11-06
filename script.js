@@ -18,7 +18,6 @@ let timeRemaining = 180; // Tempo em segundos
 let timerInterval;
 let isAnsweredCorrectly = true;
 let totalQuestions = questions.length; // Total de questões
-let averageScore = 10; // Média fictícia (Y)
 
 function startTimer() {
     timerInterval = setInterval(function () {
@@ -36,6 +35,7 @@ function showTimeUpMessage() {
     contentFinish.style.display = "none";
     timeUpMessage.style.display = "block"; // Altera o estilo de display
 }
+
 
 function hideTimeUpMessage() {
     timeUpMessage.classList.add("hidden");
@@ -168,8 +168,13 @@ function continueQuiz() {
 const continueButton = document.querySelector(".continue-button");
 continueButton.addEventListener("click", continueQuiz);
 
+function generateRandomAverage() {
+    return (Math.random() * (1 - 20)+ 20).toFixed(0);
+}
+
 function finish() {
-    textFinish.innerHTML = `<strong>Você acertou ${questionsCorrect} Questões, a média de quem faz o teste é de ${averageScore}</strong>`;
+    const randomAverage = generateRandomAverage(); // Gerar a média fictícia aleatória
+    textFinish.innerHTML = `<strong>Você acertou ${questionsCorrect} Questões, a média de quem faz o teste é de ${randomAverage}</strong>`;
     content.style.display = "none";
     contentFinish.style.display = "flex";
 }
